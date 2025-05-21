@@ -1,7 +1,5 @@
-using static UnityEngine.Random;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class CoinsSpawner : MonoBehaviour
@@ -11,51 +9,41 @@ public class CoinsSpawner : MonoBehaviour
     [SerializeField] private List<Transform> _spawnPoints;
     [SerializeField] float _timeToDelay;
 
-    private Queue<Coin> _coinsPool;
+    private int _coinsAmout;
+
     private WaitForSeconds _delay;
 
     private void Awake()
     {
-        _coinsPool = new Queue<Coin>();
         _delay = new WaitForSeconds(_timeToDelay);
-
         int spawnPointsAmount = _spawnPoints.Count;
 
         for (int i = 0; i < spawnPointsAmount; i++)
         {
             Coin coin = Instantiate(_coinPrefab);
             coin.transform.position = _spawnPoints[i].transform.position;
-            _coinsPool.Enqueue(coin);
             coin.Touched += GiveBackCoin;
         }
 
         _spawnPoints.Clear();
     }
 
-    private void GetCoin()
+    private void GetCoin(Coin coin)
     {
-        if (_coinsPool.Count > 0)
-        {
-            Coin coin = _coinsPool.Dequeue();
-            coin.gameObject.SetActive(true);
-            coin.Touched += GiveBackCoin;
-        }
+        coin.EnableSprite();
     }
 
     private void GiveBackCoin(Coin coin)
     {
-        coin.gameObject.SetActive(false);
-        _coinsPool.Enqueue(coin);
-        coin.Touched -= GiveBackCoin;
-
-        StartCoroutine(Spawning());
+        coin.DisableSprite();
+        StartCoroutine(Spawning(coin));
     }
 
-    private IEnumerator Spawning()
+    private IEnumerator Spawning(Coin coin)
     {   
         yield return _delay;
 
-        GetCoin();
+        GetCoin(coin);
     }
 
     #if UNITY_EDITOR
