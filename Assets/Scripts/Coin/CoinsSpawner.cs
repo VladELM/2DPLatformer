@@ -57,7 +57,7 @@ public class CoinsSpawner : MonoBehaviour
         {
             Transform point = _spawnPointParent.GetChild(i);
 
-            if (point.TryGetComponent(out SpawnPoint component))
+            if (point.TryGetComponent(out CoinSpawnPoint component))
                 _spawnPoints.Add(point);
         }
     }

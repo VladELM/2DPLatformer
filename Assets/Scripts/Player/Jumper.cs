@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -21,8 +19,6 @@ public class Jumper : MonoBehaviour
 
     public void Jump()
     {
-        //Debug.Log()
-
         if (IsGroundTouched())
             _rigidbody2D.AddForce(Vector2.up * _jumpForce);
     }
