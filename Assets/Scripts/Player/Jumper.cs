@@ -8,9 +8,10 @@ public class Jumper : MonoBehaviour
     [SerializeField] private GroundChecker _groundChecker;
     [SerializeField] private LayerMask _layerMask;
 
+    private Rigidbody2D _rigidbody2D;
+
     public bool IsJumping => ! IsGroundTouched();
 
-    private Rigidbody2D _rigidbody2D;
 
     private void Awake()
     {

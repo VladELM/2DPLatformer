@@ -1225,6 +1225,7 @@ GameObject:
   - component: {fileID: 1070139297}
   - component: {fileID: 1070139296}
   - component: {fileID: 1070139295}
+  - component: {fileID: 1070139301}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1392,13 +1393,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 913f791a3ae53534d85a050eb13448c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveBlendParameter: MoveBlend
-  _idleBlendParameter: IdleBlend
-  _moveBoolParameter: IsMoving
   _moveLeftValue: 0
   _moveRightValue: 1
   _idleLeftValue: 0
   _idleRightValue: 1
+  _moveBlendParameter: MoveBlend
+  _idleBlendParameter: IdleBlend
+  _moveBoolParameter: IsMoving
 --- !u!114 &1070139297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1461,6 +1462,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1070139301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070139290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbdaf6814fa4b6d41864bac895452e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1107195247
 GameObject:
   m_ObjectHideFlags: 0
@@ -1496,7 +1509,6 @@ MonoBehaviour:
   - {fileID: 1375913748}
   - {fileID: 1832177032}
   - {fileID: 1359729408}
-  _timeToDelay: 4
 --- !u!4 &1107195249
 Transform:
   m_ObjectHideFlags: 0

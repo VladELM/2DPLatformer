@@ -1,4 +1,4 @@
-using System;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -7,52 +7,39 @@ public class Coin : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Sprite _coinSprite;
+    [SerializeField] float _timeToDelay;
 
-    private bool _isExited;
-
-    public event Action<Coin> Touched;
+    private Coroutine _coroutine;
+    private WaitForSeconds _delay;
+    private bool _isTimeOut;
 
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _coinSprite = _spriteRenderer.sprite;
-        _isExited = true;
+        _delay = new WaitForSeconds(_timeToDelay);
+        _isTimeOut = true;
     }
 
-    private void OnDestroy()
+    public void HideCoin()
     {
-        Touched = null;
+        if (_isTimeOut)
+            _spriteRenderer.sprite = null;
+        else
+            StopCoroutine(_coroutine);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void GiveBackCoin()
     {
-        if (other.gameObject.TryGetComponent(out Player component))
-        {
-            DisableSprite();
-            _isExited = false;
-        }
+        _isTimeOut = false;
+        _coroutine = StartCoroutine(Spawning());
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private IEnumerator Spawning()
     {
-        if (_isExited == false)
-        {
-            if (other.gameObject.TryGetComponent(out Player component))
-            {
-                _isExited = true;
-                Touched?.Invoke(this);
-            }
-        }
-    }
+        yield return _delay;
 
-    public void EnableSprite()
-    {
-        if (_isExited)
-            _spriteRenderer.sprite = _coinSprite;
-    }
-
-    public void DisableSprite()
-    {
-        _spriteRenderer.sprite = null;
+        _isTimeOut = true;
+        _spriteRenderer.sprite = _coinSprite; ;
     }
 }

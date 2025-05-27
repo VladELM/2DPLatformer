@@ -4,44 +4,48 @@ using UnityEngine;
 
 public class AnimationOperator : MonoBehaviour
 {
-    [SerializeField] string _moveBlendParameter;
-    [SerializeField] string _idleBlendParameter;
-    [SerializeField] string _moveBoolParameter;
-    [SerializeField] float _moveLeftValue = 0;
-    [SerializeField] float _moveRightValue = 1;
-    [SerializeField] float _idleLeftValue = 0;
-    [SerializeField] float _idleRightValue = 1;
-
     private Animator _animator;
+    private int IsMoving = Animator.StringToHash(nameof(IsMoving));
+    private float _defaultScaleX;
+
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _defaultScaleX = transform.localScale.x;
     }
 
     public void TurnOnMoveMode()
     {
-        _animator.SetBool(_moveBoolParameter, true);
+        _animator.SetBool(IsMoving, true);
     }
 
     public void TurnOnIdleMode()
     {
-        _animator.SetBool(_moveBoolParameter, false);
+        _animator.SetBool(IsMoving, false);
     }
 
     public void ToggleMoveAnimation(float direction)
     {
+        float xScale = _defaultScaleX;
+
         if (direction < 0)
-            _animator.SetFloat(_moveBlendParameter, _moveLeftValue);
+            xScale *= (-1);
         else if (direction > 0)
-            _animator.SetFloat(_moveBlendParameter, _moveRightValue);
+            xScale = _defaultScaleX;
+
+        transform.localScale = new Vector3(xScale, transform.localScale.y, transform.localScale.z);
     }
 
     public void ToggleIdleAnimation(bool isIdleLeft, bool isIdleRight)
     {
+        float xScale = _defaultScaleX;
+
         if (isIdleLeft || isIdleRight == false)
-            _animator.SetFloat(_idleBlendParameter, _idleLeftValue);
+            xScale *= (-1);
         else if (isIdleLeft == false || isIdleRight)
-            _animator.SetFloat(_idleBlendParameter, _idleRightValue);
+            xScale = _defaultScaleX;
+
+        transform.localScale = new Vector3(xScale, transform.localScale.y, transform.localScale.z);
     }
 }
