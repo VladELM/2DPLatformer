@@ -2,33 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyPatroller))]
-[RequireComponent (typeof(EnemyAnimation))]
+[RequireComponent(typeof(Patroller))]
+[RequireComponent (typeof(EnemyRotator))]
 
 public class Enemy : MonoBehaviour
 {
-    private EnemyPatroller _enemyPatroller;
-    private EnemyAnimation _enemyAnimation;
-    private EnemyMode _currentMode;
+    private Patroller _patroller;
+    private EnemyRotator _enemyRotator;
+    private bool _isPatrolling;
 
-    private void OnDisable()
+    private void OnDestroy()
     {
-        _enemyPatroller.TargetChanged -= _enemyAnimation.ToggleAnimationSide;
+        _patroller.TargetChanged -= _enemyRotator.Rotate;
     }
 
     public void Initialize(Vector3 position, List<Transform> targets)
     {
         transform.position = position;
 
-        _enemyPatroller = GetComponent<EnemyPatroller>();
-        _enemyAnimation = GetComponent<EnemyAnimation>();
+        _patroller = GetComponent<Patroller>();
+        _enemyRotator = GetComponent<EnemyRotator>();
 
-        _enemyPatroller.TargetChanged += _enemyAnimation.ToggleAnimationSide;
-        _enemyPatroller.Initialize(targets);
+        _patroller.TargetChanged += _enemyRotator.Rotate;
+        _patroller.Initialize(targets);
 
-        _currentMode = EnemyMode.Patroling;
-
-
+        _isPatrolling = true;
         StartCoroutine(Operating());
     }
 
@@ -38,16 +36,8 @@ public class Enemy : MonoBehaviour
         {
             yield return null;
 
-            if (_currentMode == EnemyMode.Patroling)
-                _enemyPatroller.Patrol();
+            if (_isPatrolling)
+                _patroller.Patrol();
         }
-    }
-
-    private enum EnemyMode
-    {
-        Staying,
-        Patroling,
-        Huntig,
-        Fighting
     }
 }

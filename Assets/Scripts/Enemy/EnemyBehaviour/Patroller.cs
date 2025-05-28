@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPatroller : MonoBehaviour
+public class Patroller : MonoBehaviour
 {
-    [SerializeField] private List<Transform> _targets;
     [SerializeField] private float _speed;
 
+    private List<Transform> _targets;
     private Transform _currentTarget;
     private int _targetIndex;
 
@@ -44,7 +44,7 @@ public class EnemyPatroller : MonoBehaviour
 
         if (_currentTarget.position.y > transform.position.y)
             targetY = _currentTarget.position.y - offsetY;
-        if (_currentTarget.position.y < transform.position.y)
+        else if (_currentTarget.position.y < transform.position.y)
             targetY = _currentTarget.position.y + offsetY;
 
         return targetY;

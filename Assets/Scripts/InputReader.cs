@@ -15,12 +15,12 @@ public class InputReader : MonoBehaviour
     {
         Direction = Input.GetAxis(Horizontal);
 
-        IsMoveLeft = Input.GetKey(KeyCode.A);
-        IsMoveRight = Input.GetKey(KeyCode.D);
+        IsMoveLeft = Input.GetKey(Constants.ButtonA);
+        IsMoveRight = Input.GetKey(Constants.ButtonD);
 
-        IsIdleLeft = Input.GetKeyUp(KeyCode.A);
-        IsIdleRight = Input.GetKeyUp(KeyCode.D);
+        IsIdleLeft = Input.GetKeyUp(Constants.ButtonA);
+        IsIdleRight = Input.GetKeyUp(Constants.ButtonD);
 
-        IsJump = Input.GetKey(KeyCode.Space);
+        IsJump = Input.GetKey(Constants.ButtonSpace);
     }
 }
