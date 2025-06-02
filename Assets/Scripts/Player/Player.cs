@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     {
         if (_inputReader.Direction != 0)
         {
-            _rotator.Rotate(_inputReader.Direction);
+            _rotator.RotatePlayer(_inputReader.Direction);
             _mover.Move(_inputReader.Direction);
         }
 

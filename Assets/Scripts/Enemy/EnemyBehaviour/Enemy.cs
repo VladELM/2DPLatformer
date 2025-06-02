@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Patroller))]
-[RequireComponent (typeof(EnemyRotator))]
+[RequireComponent (typeof(Rotator))]
 
 public class Enemy : MonoBehaviour
 {
     private Patroller _patroller;
-    private EnemyRotator _enemyRotator;
+    private Rotator _enemyRotator;
     private bool _isPatrolling;
 
     private void OnDestroy()
     {
-        _patroller.TargetChanged -= _enemyRotator.Rotate;
+        _patroller.TargetChanged -= _enemyRotator.RotateEnemy;
     }
 
     public void Initialize(Vector3 position, List<Transform> targets)
@@ -21,9 +21,9 @@ public class Enemy : MonoBehaviour
         transform.position = position;
 
         _patroller = GetComponent<Patroller>();
-        _enemyRotator = GetComponent<EnemyRotator>();
+        _enemyRotator = GetComponent<Rotator>();
 
-        _patroller.TargetChanged += _enemyRotator.Rotate;
+        _patroller.TargetChanged += _enemyRotator.RotateEnemy;
         _patroller.Initialize(targets);
 
         _isPatrolling = true;

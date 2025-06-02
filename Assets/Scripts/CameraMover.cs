@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class Camera : MonoBehaviour
+public class CameraMover : MonoBehaviour
 {
     [SerializeField] private Transform _player;
 
-    void Update()
+    private void LateUpdate()
     {
         transform.position = new Vector3(_player.position.x, _player.position.y, transform.position.z);
     }

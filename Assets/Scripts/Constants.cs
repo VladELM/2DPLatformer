@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Constants : MonoBehaviour
+public class Constants
 {
     public const KeyCode ButtonA = KeyCode.A;
     public const KeyCode ButtonD = KeyCode.D;

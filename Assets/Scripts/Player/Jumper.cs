@@ -6,11 +6,10 @@ public class Jumper : MonoBehaviour
 {
     [SerializeField] private float _jumpForce;
     [SerializeField] private GroundChecker _groundChecker;
-    [SerializeField] private LayerMask _layerMask;
 
     private Rigidbody2D _rigidbody2D;
 
-    public bool IsJumping => ! IsGroundTouched();
+    public bool IsJumping => !_groundChecker.IsGroundTouched;
 
 
     private void Awake()
@@ -20,12 +19,7 @@ public class Jumper : MonoBehaviour
 
     public void Jump()
     {
-        if (IsGroundTouched())
+        if (_groundChecker.IsGroundTouched)
             _rigidbody2D.AddForce(Vector2.up * _jumpForce);
-    }
-
-    private bool IsGroundTouched()
-    {
-        return Physics2D.OverlapCircle(_groundChecker.transform.position, _groundChecker.Radius, _layerMask);
     }
 }

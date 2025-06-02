@@ -1392,9 +1392,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _jumpForce: 80
   _groundChecker: {fileID: 1256428513}
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!114 &1070139296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1407,6 +1404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 913f791a3ae53534d85a050eb13448c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _movingParameter: IsMoving
 --- !u!114 &1070139297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1589,6 +1587,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cb5aa4e9369eb84a8c051d414343c3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!58 &1256428514
 CircleCollider2D:
   m_ObjectHideFlags: 0
