@@ -22,7 +22,6 @@ public class Patroller : MonoBehaviour
 
     public void Patrol()
     {
-
         Vector3 targetPosition = new Vector3(_currentTarget.position.x,
                                                 GetEqualizedTargetY(),
                                             _currentTarget.position.z);

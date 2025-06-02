@@ -11,7 +11,6 @@ public class Jumper : MonoBehaviour
 
     public bool IsJumping => !_groundChecker.IsGroundTouched;
 
-
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
